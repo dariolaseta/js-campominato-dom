@@ -56,7 +56,8 @@ function toggleBackground(item){
     }
 
     if(bombs.includes(number)){
-        console.log("bomba");
+        document.getElementById("score").innerHTML = "Hai perso!";
+        item.classList.add("red");
     }
     console.log(userCellClick)
     
@@ -67,7 +68,7 @@ function reset(){
     let selectedCells = document.getElementsByClassName("selected");
 
     while(selectedCells.length){
-        selectedCells[0].classList.remove("selected");
+        selectedCells[0].classList.remove("selected" , "red");
         canReset = false;
     }
     bombs = [];
