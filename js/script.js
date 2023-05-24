@@ -2,6 +2,7 @@ const gridElement = document.getElementById("grid");
 const button = document.getElementById("button");
 let isCreated = false;
 let canReset = false;
+let score = 0;
 
 button.addEventListener("click", function(){
     gridElement.classList.add("container");
@@ -38,6 +39,8 @@ function toggleBackground(item){
     console.log(item.textContent);
     canReset = true;
     item.classList.toggle("selected");
+    score++;
+    console.log(score);
     return item;
 }
 
@@ -48,6 +51,8 @@ function reset(){
         selectedCells[0].classList.remove("selected");
         canReset = false;
     }
+    score = 0;
+    console.log(score);
 
     return selectedCells;
 }
