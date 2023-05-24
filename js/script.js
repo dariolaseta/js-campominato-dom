@@ -48,7 +48,7 @@ function toggleBackground(item){
 
     
     let number = (parseInt(item.textContent));
-    if(!isInArray(userCellClick, number)){
+    if(!userCellClick.includes(number)){
         userCellClick.push(number);
         ++score;
         document.getElementById("score").innerHTML = "Punteggio: " + score;
@@ -73,6 +73,7 @@ function reset(){
     bombs = [];
 
     score = 0;
+    userCellClick = [];
     document.getElementById("score").innerHTML = "Punteggio: " + score;
     console.log(score);
 
@@ -83,23 +84,10 @@ function generateRandomNumber(min, max){
     return Math.floor(Math.random() * max) + min;
 }
 
-function isInArray(array, element){
-    let result = false;
-
-    for(i = 0; i < array.lenght; i++){
-        if(array[i] === element){
-            result = true;
-        }
-    }
-
-    return result;
-}
-
 function generateBombs(){
     while(bombs.length < 16){
         let randomNumbers = generateRandomNumber(1, 100);
-        let findNumber = isInArray(bombs, randomNumbers);
-        if(findNumber == false){
+        if(!bombs.includes(randomNumbers)){
             bombs.push(randomNumbers);
         }
     }
