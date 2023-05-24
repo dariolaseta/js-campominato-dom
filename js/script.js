@@ -45,8 +45,21 @@ function toggleBackground(item){
     console.log(item.textContent);
     canReset = true;
     item.classList.add("selected");
-    score++;
-    console.log(score);
+
+    
+    let number = (parseInt(item.textContent));
+    if(!isInArray(userCellClick, number)){
+        userCellClick.push(number);
+        score++;
+        console.log(score);
+
+    }
+
+    if(bombs.includes(number)){
+        console.log("bomba");
+    }
+    console.log(userCellClick)
+    
     return item;
 }
 
