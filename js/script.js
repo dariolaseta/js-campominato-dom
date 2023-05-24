@@ -3,16 +3,20 @@ const button = document.getElementById("button");
 let isCreated = false;
 let canReset = false;
 let score = 0;
+let userCellClick = [];
+let bombs = [];
+
 
 button.addEventListener("click", function(){
     gridElement.classList.add("container");
 
-    randomNumberGenerator(1, 100, 16);
+    generateBombs();
 
+    console.log(bombs);
     if(!isCreated){
         for (let i = 0; i < 100; i++) {
             const newCell = createCell(i);
-            
+
             newCell.addEventListener("click", function(){
                 toggleBackground(newCell);
                 canReset = true;
@@ -25,6 +29,8 @@ button.addEventListener("click", function(){
 
     if(canReset){
         reset();
+        generateBombs();
+        console.log(bombs)
     }
 });
 
@@ -38,7 +44,7 @@ function createCell(cellNumber) {
 function toggleBackground(item){
     console.log(item.textContent);
     canReset = true;
-    item.classList.toggle("selected");
+    item.classList.add("selected");
     score++;
     console.log(score);
     return item;
@@ -51,26 +57,38 @@ function reset(){
         selectedCells[0].classList.remove("selected");
         canReset = false;
     }
+    bombs = [];
+
     score = 0;
     console.log(score);
 
     return selectedCells;
 }
 
-function randomNumberGenerator(min, max, element){
-    let numberArray = [];
+function generateRandomNumber(min, max){
+    return Math.floor(Math.random() * max) + min;
+}
 
-    if((max - min) < element){
-        return [];
-    }
+function isInArray(array, element){
+    let result = false;
 
-    while(numberArray.length < element){
-        let randomNumber = Math.floor(Math.random() * max) + min;
-        if(!numberArray.includes(randomNumber)){
-            numberArray.push(randomNumber);
+    for(i = 0; i < array.lenght; i++){
+        if(array[i] === element){
+            result = true;
         }
     }
-    console.log(numberArray);
 
-    return numberArray;
+    return result;
+}
+
+function generateBombs(){
+    while(bombs.length < 16){
+        let randomNumbers = generateRandomNumber(1, 100);
+        let findNumber = isInArray(bombs, randomNumbers);
+        if(findNumber == false){
+            bombs.push(randomNumbers);
+        }
+    }
+
+    return bombs;
 }

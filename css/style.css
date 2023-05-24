@@ -58,3 +58,11 @@ div.cells span{
 .selected{
     background-color: skyblue;
 }
+
+.red{
+    background-color: red;
+}
+
+#score{
+    font-size: 2rem;
+}
