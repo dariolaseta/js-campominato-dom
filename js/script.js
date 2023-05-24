@@ -50,9 +50,9 @@ function toggleBackground(item){
     let number = (parseInt(item.textContent));
     if(!isInArray(userCellClick, number)){
         userCellClick.push(number);
-        score++;
+        ++score;
+        document.getElementById("score").innerHTML = "Punteggio: " + score;
         console.log(score);
-
     }
 
     if(bombs.includes(number)){
@@ -73,6 +73,7 @@ function reset(){
     bombs = [];
 
     score = 0;
+    document.getElementById("score").innerHTML = "Punteggio: " + score;
     console.log(score);
 
     return selectedCells;
