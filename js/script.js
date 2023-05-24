@@ -11,11 +11,8 @@ button.addEventListener("click", function(){
     gridElement.classList.add("container");
 
     generateBombs();
-
-    
-
     console.log(bombs);
-    console.log(win)
+
     if(!isCreated){
         for (let i = 0; i < 100; i++) {
             const newCell = createCell(i);
@@ -50,7 +47,6 @@ function toggleBackground(item){
         canReset = true;
         item.classList.add("selected");
     }
-
     
     let number = (parseInt(item.textContent));
     if(!userCellClick.includes(number) && win == 0){
@@ -81,6 +77,7 @@ function reset(){
         selectedCells[0].classList.remove("selected", "red");
         canReset = false;
     }
+    
     bombs = [];
     userCellClick = [];
     win = 0;
