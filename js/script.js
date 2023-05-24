@@ -3,6 +3,7 @@ const button = document.getElementById("button");
 const main = document.querySelector("main");
 let isCreated = false;
 let canReset = false;
+let win = 0;
 let score = 0;
 let userCellClick = [];
 let bombs = [];
@@ -12,7 +13,10 @@ button.addEventListener("click", function(){
 
     generateBombs();
 
+    
+
     console.log(bombs);
+    console.log(win)
     if(!isCreated){
         for (let i = 0; i < 100; i++) {
             const newCell = createCell(i);
@@ -21,7 +25,7 @@ button.addEventListener("click", function(){
                 toggleBackground(newCell);
                 canReset = true;
             });
-
+            
             gridElement.append(newCell);
         }
         isCreated = true;
@@ -42,27 +46,29 @@ function createCell(cellNumber) {
 }
 
 function toggleBackground(item){
-    console.log(item.textContent);
-    canReset = true;
-    item.classList.add("selected");
+    if(win == 0){
+        console.log(item.textContent);
+        canReset = true;
+        item.classList.add("selected");
+    }
 
     
     let number = (parseInt(item.textContent));
-    if(!userCellClick.includes(number)){
+    if(!userCellClick.includes(number) && win == 0){
         userCellClick.push(number);
         ++score;
         document.getElementById("score").innerHTML = "Punteggio: " + score;
-        console.log(score);
     }
 
-    if(bombs.includes(number)){
+    if(bombs.includes(number) && win == 0){
         document.getElementById("score").innerHTML = "Hai perso!";
         item.classList.add("red");
-
+        win = 1;
     }
 
-    if(score === 100 - bombs.length){
-        document.getElementById("score").innerHTML = "Hai vinto!";
+    if(score === 100 - bombs.length && win == 0){
+        document.getElementById("score").innerHTML = "Hai vinto! Il tuo punteggio è: " + score;
+        win = 2;
     }
     console.log(userCellClick)
     
@@ -73,13 +79,13 @@ function reset(){
     let selectedCells = document.getElementsByClassName("selected");
 
     while(selectedCells.length){
-        selectedCells[0].classList.remove("selected" , "red");
+        selectedCells[0].classList.remove("selected", "red");
         canReset = false;
     }
     bombs = [];
-
-    score = 0;
     userCellClick = [];
+    win = 0;
+    score = 0;
     document.getElementById("score").innerHTML = "Punteggio: " + score;
     console.log(score);
 
