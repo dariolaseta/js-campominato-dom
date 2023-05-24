@@ -1,6 +1,5 @@
 const gridElement = document.getElementById("grid");
 const button = document.getElementById("button");
-const main = document.querySelector("main");
 let isCreated = false;
 let canReset = false;
 let win = 0;
