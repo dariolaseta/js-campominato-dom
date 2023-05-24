@@ -6,6 +6,8 @@ let canReset = false;
 button.addEventListener("click", function(){
     gridElement.classList.add("container");
 
+    randomNumberGenerator(1, 100, 16);
+
     if(!isCreated){
         for (let i = 0; i < 100; i++) {
             const newCell = createCell(i);
@@ -50,20 +52,20 @@ function reset(){
     return selectedCells;
 }
 
-function randomNumberGenerator(min, max){
+function randomNumberGenerator(min, max, element){
     let numberArray = [];
 
-    if((max - min) < 4){
+    if((max - min) < element){
         return [];
     }
 
-    while(numberArray.length < 4){
+    while(numberArray.length < element){
         let randomNumber = Math.floor(Math.random() * max) + min;
         if(!numberArray.includes(randomNumber)){
             numberArray.push(randomNumber);
         }
     }
-
     console.log(numberArray);
+
     return numberArray;
 }
