@@ -1,11 +1,11 @@
 const gridElement = document.getElementById("grid");
 const button = document.getElementById("button");
+const main = document.querySelector("main");
 let isCreated = false;
 let canReset = false;
 let score = 0;
 let userCellClick = [];
 let bombs = [];
-
 
 button.addEventListener("click", function(){
     gridElement.classList.add("container");
@@ -58,6 +58,11 @@ function toggleBackground(item){
     if(bombs.includes(number)){
         document.getElementById("score").innerHTML = "Hai perso!";
         item.classList.add("red");
+
+    }
+
+    if(score === 100 - bombs.length){
+        document.getElementById("score").innerHTML = "Hai vinto!";
     }
     console.log(userCellClick)
     
